@@ -5,11 +5,16 @@
 
 <% include ../partials/head %>
 
-<body >
+<body>
 
     <% include ../partials/header %>
     <div class="container">
-        
+        <div class="row">
+                <!-- <div class="row justify-content-center align-items-center">  -->
+            <%for(var i=0;i<10;i++){ %>
+            <% include ../partials/note %>
+            <% } %>
+        </div>
     </div>
     <footer>
         <% include ../partials/footer %>
