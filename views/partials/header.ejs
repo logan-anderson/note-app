@@ -1,19 +1,59 @@
 <!-- views/partials/header.ejs -->
 
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-    
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-                EJS Is Fun
-            </a>
-    
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </div>
-    
+<div class="row">
+    <div class="col-md-12">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn" data-toggle="modal" data-target="#noteModal">
+                    add a note
+                </button>
+            </li>
+        </ul>
     </div>
-    </nav>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add a Note</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Modal Body -->
+                <div class="input-group">
+                    <div class="col">
+                        <div class="row">
+                            <textarea class="form-control" rows="10" aria-label="With textarea"></textarea>
+                        </div>
+                        <div class="row">
+                            <p class="py-4">add by list (optional)</p>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Add Item"
+                                    aria-label="Add Item" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">Add Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Modal Body -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save Note</button>
+            </div>
+        </div>
+    </div>
+</div>
