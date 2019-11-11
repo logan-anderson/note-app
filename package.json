@@ -6,14 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "clean-css": ">=4.1.11",
+    "constantinople": ">=3.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^2.7.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "constantinople": ">=3.1.1",
-    "clean-css": ">=4.1.11"
+    "mongoose": "^5.7.9",
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

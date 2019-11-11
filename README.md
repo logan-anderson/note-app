@@ -1,3 +1,5 @@
 # # to run the app
 DEBUG=note-app:* npm start  
 MEN stack (mongoBD, Express, Node)
+
+sudo npm install nodemon -g 

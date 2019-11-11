@@ -1,25 +1,18 @@
 <!-- views/partials/header.ejs -->
 
-<div class="row">
-    <div class="col-md-12">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn" data-toggle="modal" data-target="#noteModal">
-                    add a note
-                </button>
-            </li>
-        </ul>
-    </div>
-</div>
+<nav class="navbar sticky-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">Note app</a>
+    <button type="button" class="btn" data-toggle="modal" data-target="#noteModal">
+        add a note
+    </button>
+</nav>
+
 
 
 <!-- Modal -->
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-full" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Add a Note</h5>
@@ -30,19 +23,20 @@
             <div class="modal-body">
                 <!-- Modal Body -->
                 <div class="input-group">
-                    <div class="col">
+                    <div class="col modal-col-test">
                         <div class="row">
                             <textarea class="form-control" rows="6" aria-label="With textarea"></textarea>
                         </div>
                         <div class="row">
                             <p class="py-4">add by list (optional)</p>
                         </div>
-                        <div class="row">
+                        <div class="row list-items-row">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Add Item"
-                                    aria-label="Add Item" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="Add Item" aria-label="Add Item"
+                                    aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">Add Item</button>
+                                    <button class="btn btn-outline-secondary add-item-btn" type="button">Add
+                                        Item</button>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="add-note"><button type="button" class="btn btn-primary" >Save Note</button></a>
+                <a href="add-note"><button type="button" class="btn btn-primary">Save Note</button></a>
             </div>
         </div>
     </div>
