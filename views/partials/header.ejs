@@ -1,7 +1,7 @@
 <!-- views/partials/header.ejs -->
 
 <nav class="navbar sticky-top navbar-light bg-light">
-    <a class="navbar-brand" href="#">Note app</a>
+    <a class="navbar-brand" href="/">Note app</a>
     <button type="button" class="btn" data-toggle="modal" data-target="#noteModal">
         add a note
     </button>
@@ -28,9 +28,6 @@
                             <p>Title</p>
                             <textarea class="form-control" id="title-input" rows="1" aria-label="With textarea"></textarea>
                         </div>
-                        <!-- <div class="row">
-                            <p class="py-4">add by list (optional)</p>
-                        </div> -->
                         <div class="row list-items-row">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Add Item" aria-label="Add Item"
@@ -49,8 +46,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form action="/note/add" method="POST">
                     <input type="submit" class="btn btn-primary" value="Save Note">
-                    <input type="hidden" id="note-list" name="notes"> 
-                    <input type="hidden" id="title-form" name="title">
+                    <input type="hidden" class="note-list" name="notes"> 
+                    <input type="hidden" class="title-form" name="title">
                 </form>
             </div>
         </div>

@@ -1,0 +1,35 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+    <% include ../partials/header %>
+    <div class="container">
+        <h1>Edit List</h1>
+        <%- include('../partials/edit', {note: note}); %>
+        <div class="row">
+            <div class="col-6">
+                <form action="/note/edit/<%= note._id%>" method="post">
+                    <button class="btn btn-outline-info btn-edit-save" type="submit">
+                        Save Changes
+                    </button>
+                    <input type="hidden" id="note-list-edit" name="notes"> 
+                    <input type="hidden" id="title-form-edit" name="title">
+                </form>
+            </div>
+            <div class="col-6">
+                <a href="/" class="btn btn-outline-danger">Discard Changes</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+    <script src="/js/editNote.js"></script>
+
+</body>
+
+</html>

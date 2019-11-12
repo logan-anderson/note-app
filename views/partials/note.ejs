@@ -13,13 +13,25 @@
                 </li>
                 <% }%>
             </ul>
-            <form action="/note/delete/<%= note._id %>" method="POST">
-                <!-- <input type="hidden"  name="note-id" value="<%= note._id %>"> -->
-                <button type="submit" class="btn btn-outline-danger btn-small">
-                    Delete
-                </button>
-
-            </form>
+            <div class="row">
+                <div class="col-6">
+                    <!-- Form for deleting a note -->
+                    <form action="/note/delete/<%= note._id %>" method="POST">
+                        <!-- <input type="hidden"  name="note-id" value="<%= note._id %>"> -->
+                        <button type="submit" class="btn btn-outline-danger btn-small">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <!-- Form that takes you to the edit page -->
+                    <form action="/note/edit/<%= note._id %>" method="get">
+                        <button type="submit" class="btn btn-outline-info btn-small">
+                            Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
