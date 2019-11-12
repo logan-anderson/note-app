@@ -26,3 +26,10 @@ or you can use nodemon for hot reload capability
 
 * `sudo npm install nodemon -g`
 * `nodemon` (This will now run the app)
+
+## server setup
+
+I used digital ocean for a VM. I  used pm2 (node package) and nginx to deploy the app on a server. I used these two resources to help me
+
+* <https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04>
+* <https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04>
