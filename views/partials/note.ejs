@@ -1,4 +1,4 @@
-<div class="col col-md-6 col-lg-4 py-3">
+<div class="col col-md-6 col-lg-4 py-3 note-div">
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">
@@ -8,12 +8,19 @@
             </h5>
             <ul>
                 <%for(var i=0;i < note.list_content.length;i++){ %>
-                    <li>
-                            <%= note.list_content[i] %>
-                    </li>
+                <li>
+                    <%= note.list_content[i] %>
+                </li>
                 <% }%>
             </ul>
+            <form action="/note/delete/<%= note._id %>" method="POST">
+                <!-- <input type="hidden"  name="note-id" value="<%= note._id %>"> -->
+                <button type="submit" class="btn btn-outline-danger btn-small">
+                    Delete
+                </button>
 
+            </form>
         </div>
     </div>
+
 </div>
