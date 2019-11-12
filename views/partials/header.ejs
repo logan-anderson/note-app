@@ -26,7 +26,7 @@
                     <div class="col modal-col-test">
                         <div class="row py-3">
                             <p>Title</p>
-                            <textarea class="form-control" rows="1" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" id="title-input" rows="1" aria-label="With textarea"></textarea>
                         </div>
                         <!-- <div class="row">
                             <p class="py-4">add by list (optional)</p>
@@ -47,7 +47,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="add-note"><button type="button" class="btn btn-primary">Save Note</button></a>
+                <form action="/add-note" method="POST">
+                    <input type="submit" class="btn btn-primary" value="Save Note">
+                    <input type="hidden" id="note-list" name="notes"> 
+                    <input type="hidden" id="title-form" name="title">
+                </form>
             </div>
         </div>
     </div>
