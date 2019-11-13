@@ -1,3 +1,5 @@
+// all js to control the edit list page
+
 hiddenFormNotes = document.querySelector("#note-list-edit");
 function add_item_edit() {
     //set the hidden title form value
@@ -5,11 +7,6 @@ function add_item_edit() {
 
     let cols = document.querySelector(".col-edit");
     let itemRow = document.querySelector(".list-items-row-edit");
-
-    // let allRows = document.querySelectorAll(".list-items-row");
-    // let lastRow = allRows[allRows.length-1];
-    // update as we go
-    // hiddenFormNotes.value = hiddenFormNotes.value + ',' + lastRow.childNodes[1].childNodes[1].value;
 
     // or update everything
     hiddenFormNotes.value = JSON.stringify(getData_edit());

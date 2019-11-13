@@ -4,36 +4,12 @@ var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 var Note = mongoose.model('Note');
 
-// router.get('/', function (req, res, next) {
-//     // creat a note in the database
-//     Note.create({
-//         note_id: 2,
-//         list_content: ["this is a note", "so is this"],
-//         title: "DB Note",
-//     }, (err, note) => {
-//         //call back function
-//         if (err) {
-//             console.log("Something went wrong");
-//             res.send("Server error");
-//         } else {
-//             console.log("We saved a note to the db");
-//             // console.log(note);
-//             // get all the notes
-//             Note.find({}, (err, nts) => {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     //array of notes
-//                     console.log(nts);
-//                     ///send back the main page
-//                     res.render('pages/index', { notes: nts });
-//                 }
-//             });
-//         }
-//     });
-// });
+//if the request ./note/ just redirect them back to home
+router.get('/', function (req, res, next) {
+    res.redirect("/");
+});
+// post method for adding a node to the database
 router.post('/add', function (req, res, next) {
-    console.log("we got a post request");
     console.log(req.body.title);
     console.log(req.body.notes);
     if (req.body.title && req.body.notes) {
@@ -51,8 +27,12 @@ router.post('/add', function (req, res, next) {
                 res.redirect("/");
             }
         });
+    } else {
+        res.redirect('/');
     }
 });
+// post method for deleting a note from the database  /note/delete/<id of the note>
+// the id of the note is encoded in the front end 
 router.post('/delete/:id', function (req, res, next) {
     console.log("we got a post request");
     var id = req.params.id;
@@ -66,8 +46,9 @@ router.post('/delete/:id', function (req, res, next) {
             res.redirect('/');
         }
     });
-    // res.redirect('/');
 });
+//the get method for editing a note
+// /note/edit/<id>
 router.get('/edit/:id', function (req, res, next) {
     console.log("the note page");
     var id = req.params.id;
@@ -79,21 +60,20 @@ router.get('/edit/:id', function (req, res, next) {
             console.log("found note");
             console.log(nt);
             console.log(typeof (nt));
+            //render the edit note page with the note 
             res.render('pages/editNote', { note: nt });
-            // res.redirect("/");
         }
     });
 });
+// post method for editing a note
+// /note/edit/<id>
 router.post('/edit/:id', function (req, res, next) {
     console.log("we got a post request");
-    console.log(req.body.title);
     var newNotes = JSON.parse(req.body.notes)
-    console.log(newNotes);
-
     var id = req.params.id;
     var newTitle = req.body.title;
-    console.log(id);
 
+    //find the Note in the database and update it with the edited content
     Note.findOneAndUpdate({ _id: id }, { list_content: newNotes, title: newTitle }, { upsert: true }, function (err, doc) {
         if (err) {
             console.log("error in updating");

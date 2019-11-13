@@ -16,6 +16,7 @@ This app uses a pretty simple stack
 first clone this repo and install the packages
 
 * `git clone git@github.com:logan-anderson/note-app.git`
+* `cd note-app`
 * `npm install`
 
 you can run the app by enter the following

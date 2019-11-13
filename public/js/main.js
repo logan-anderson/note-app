@@ -1,9 +1,10 @@
+// all js to control entering a note form (from the nav bar)
+console.log("connected")
 hiddenFormNotes = document.querySelector("#note-list");
-
 function add_item() {
     //set the hidden title form value
     document.getElementById("title-form").value =  document.getElementById('title-input').value;
-
+    
     let cols = document.querySelector(".modal-col-test");
     let itemRow = document.querySelector(".list-items-row");
 
