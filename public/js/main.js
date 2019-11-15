@@ -36,4 +36,3 @@ function getData(){
     return data;
 }
 setupListeners();
-
