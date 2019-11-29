@@ -12,37 +12,27 @@ var noteSchema = new mongoose.Schema({
   list_content: Array,
   title: String,
 })
+var noteSchema_backup = new mongoose.Schema({
+  note_id: Number,
+  note_content: String,
+  list_content: Array,
+  title: String,
+})
 var Note = mongoose.model("Note", noteSchema);
+var NoteBackup = mongoose.model("NoteBackup", noteSchema_backup);
 
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
   console.log("get request on /");
-  var n = [
-    {
-      'title': "Logans Note",
-      'content': ['Note one', 'note two'],
-    },
-    {
-      'title': "Maddie Note",
-      'content': ['Note one', 'note two'],
-    },
-    {
-      'title': "Katie Note",
-      'content': ['Note one', 'nothttps://www.logananderson.ca/e two'],
-    },
-  ];
   Note.find({}, (err, nts) => {
     if (err) {
       console.log(err);
-      res.render('pages/index', { notes: n });
+      res.send("Server Error");
     } else {
       //array of notes
-      // console.log(nts);
       res.render('pages/index', { notes: nts });
     }
   });
-  // res.render('pages/about');
 });
-
 module.exports = router;

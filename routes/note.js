@@ -2,7 +2,14 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
+
 var Note = mongoose.model('Note');
+
+
+
+
+var NoteBackup = mongoose.model("NoteBackup");
+
 
 //if the request ./note/ just redirect them back to home
 router.get('/', function (req, res, next) {
@@ -13,7 +20,8 @@ router.post('/add', function (req, res, next) {
     console.log(req.body.title);
     console.log(req.body.notes);
     if (req.body.title && req.body.notes) {
-        Note.create({
+        // make a backup note
+        NoteBackup.create({
             note_id: 1,
             list_content: JSON.parse(req.body.notes),
             title: req.body.title,
@@ -21,13 +29,28 @@ router.post('/add', function (req, res, next) {
             //call back function
             if (err) {
                 console.log("Something went wrong");
-                res.send("Server error");
             } else {
                 console.log("We saved a note to the db");
-                res.redirect("/");
+                // make the real note
+                Note.create({
+                    note_id: 1,
+                    list_content: JSON.parse(req.body.notes),
+                    title: req.body.title,
+                }, (err, note) => {
+                    //call back function
+                    if (err) {
+                        console.log("Something went wrong");
+                        res.send("Server error");
+                    } else {
+                        console.log("We saved a note to the db");
+                        res.redirect("/");
+                    }
+                });
             }
         });
+        console.log("not good");
     } else {
+        console.log("got nothing!");
         res.redirect('/');
     }
 });
@@ -65,7 +88,7 @@ router.get('/edit/:id', function (req, res, next) {
         }
     });
 });
-// post method for editing a note
+// post method for updating a note
 // /note/edit/<id>
 router.post('/edit/:id', function (req, res, next) {
     console.log("we got a post request");
