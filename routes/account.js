@@ -1,21 +1,24 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
-var Note = mongoose.model('Note');
-var NoteBackup = mongoose.model("NoteBackup");
+const Note = mongoose.model('Note');
+const NoteBackup = mongoose.model("NoteBackup");
 
 
-//if the request ./account/register
-router.get('/login', function (req, res, next) {
-    console.log("got here");
+router.get('/', (req, res, render)=>{
+    console.log("we here");
+    res.render('pages/account');
+})
 
+//if the request ./account/login
+router.get('/login', (req, res, next)=>{
     res.render('pages/login');
 });
 
 //if the request ./account/register
-router.get('/register', function (req, res, next) {
+router.get('/register', (req, res, next)=>{
     console.log("got here");
 
     res.render('pages/register');
