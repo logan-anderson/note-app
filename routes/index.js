@@ -3,6 +3,9 @@ var router = express.Router();
 
 // var mongoose = require("mongoose");
 //db stuff
+
+
+
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/notes_db", { useNewUrlParser: true, useUnifiedTopology: true });
 
