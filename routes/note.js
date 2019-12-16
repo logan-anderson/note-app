@@ -5,9 +5,6 @@ mongoose.set('useFindAndModify', false);
 
 var Note = mongoose.model('Note');
 
-
-
-
 var NoteBackup = mongoose.model("NoteBackup");
 
 

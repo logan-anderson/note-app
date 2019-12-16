@@ -1,28 +1,9 @@
-var express = require('express');
-var router = express.Router();
-
-// var mongoose = require("mongoose");
-//db stuff
+const express = require('express');
+const router = express.Router();
+const mongoose = require("mongoose");
 
 
-
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/notes_db", { useNewUrlParser: true, useUnifiedTopology: true });
-
-var noteSchema = new mongoose.Schema({
-  note_id: Number,
-  note_content: String,
-  list_content: Array,
-  title: String,
-})
-var noteSchema_backup = new mongoose.Schema({
-  note_id: Number,
-  note_content: String,
-  list_content: Array,
-  title: String,
-})
-var Note = mongoose.model("Note", noteSchema);
-var NoteBackup = mongoose.model("NoteBackup", noteSchema_backup);
+var Note = mongoose.model('Note');
 
 
 /* GET home page. */
