@@ -11,24 +11,22 @@ const passport = require('passport');
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/notes_db", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(()=>console.log('mongodb connected...'))
-    .catch(()=>console.log('error'));
+    .catch((err)=>console.log('error: '+ err));
 
 
+// const noteSchema = new mongoose.Schema({
+//     note_content: String,
+//     list_content: Array,
+//     title: String,
+// })
+// const noteSchema_backup = new mongoose.Schema({
+//     note_content: String,
+//     list_content: Array,
+//     title: String,
+// })
+// mongoose.model("Note", noteSchema);
+// mongoose.model("NoteBackup", noteSchema_backup);
 
-const noteSchema = new mongoose.Schema({
-    note_id: Number,
-    note_content: String,
-    list_content: Array,
-    title: String,
-})
-const noteSchema_backup = new mongoose.Schema({
-    note_id: Number,
-    note_content: String,
-    list_content: Array,
-    title: String,
-})
-mongoose.model("Note", noteSchema);
-mongoose.model("NoteBackup", noteSchema_backup);
 
 
 

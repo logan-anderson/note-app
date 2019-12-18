@@ -3,10 +3,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 
-var Note = mongoose.model('Note');
-
-var NoteBackup = mongoose.model("NoteBackup");
-
+// const Note = mongoose.model('Note');
+// const NoteBackup = mongoose.model("NoteBackup");
+{const Note, NoteBackup } = require('../models/Note');
 
 //if the request ./note/ just redirect them back to home
 router.get('/', function (req, res, next) {
