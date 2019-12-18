@@ -1,16 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const {Note, NoteBackup} = require('../models/Note');
 mongoose.set('useFindAndModify', false);
 
-// const Note = mongoose.model('Note');
-// const NoteBackup = mongoose.model("NoteBackup");
-{const Note, NoteBackup } = require('../models/Note');
 
 //if the request ./note/ just redirect them back to home
 router.get('/', function (req, res, next) {
-    res.redirect("/");
+    res.redirect('/');
 });
+
 // post method for adding a node to the database
 router.post('/add', function (req, res, next) {
     console.log(req.body.title);
@@ -54,8 +53,7 @@ router.post('/add', function (req, res, next) {
 // the id of the note is encoded in the front end 
 router.post('/delete/:id', function (req, res, next) {
     console.log("we got a post request");
-    var id = req.params.id;
-    console.log(id);
+    const id = req.params.id;
     Note.deleteOne({ _id: id }, (err) => {
         if (err) {
             console.log("did not delete");
@@ -69,8 +67,7 @@ router.post('/delete/:id', function (req, res, next) {
 //the get method for editing a note
 // /note/edit/<id>
 router.get('/edit/:id', function (req, res, next) {
-    console.log("the note page");
-    var id = req.params.id;
+    const id = req.params.id;
     Note.findOne({ _id: id }, (err, nt) => {
         if (err) {
             console.log("did not find a note");
@@ -88,9 +85,9 @@ router.get('/edit/:id', function (req, res, next) {
 // /note/edit/<id>
 router.post('/edit/:id', function (req, res, next) {
     console.log("we got a post request");
-    var newNotes = JSON.parse(req.body.notes)
-    var id = req.params.id;
-    var newTitle = req.body.title;
+    const newNotes = JSON.parse(req.body.notes)
+    const id = req.params.id;
+    const newTitle = req.body.title;
 
     //find the Note in the database and update it with the edited content
     Note.findOneAndUpdate({ _id: id }, { list_content: newNotes, title: newTitle }, { upsert: true }, function (err, doc) {

@@ -4,7 +4,7 @@
         <textarea class="form-control" id="title-input-edit" rows="1"
             aria-label="With textarea"><%= note.title %></textarea>
     </div>
-    <%for(var i=0;i < note.list_content.length;i++){ %>
+    <%for(let i=0;i < note.list_content.length;i++){ %>
     <div class="row list-items-row-edit">
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Add Item" aria-label="Add Item"

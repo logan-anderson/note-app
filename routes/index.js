@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 
-
-var Note = mongoose.model('Note');
+const Note = require('../models/Note').Note;
 
 
 /* GET home page. */
