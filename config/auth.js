@@ -11,16 +11,22 @@ module.exports = {
     },
     ensureAccountOwnsNote: function (req, res, next) {
         const noteId = req.params.id;
-        console.log('the note id is, ' + noteId);
-        console.log('the user ID is, ' + req.user._id);
+       
 
         //get he note and make sure it belongs to that user
 
         Note.findById(noteId)
             .then(note => {
-                console.log(note);
+                console.log(req.user._id);
+                console.log(note.owner);
+                console.log(typeof note.owner);
+                console.log(typeof req.user._id);
+                const owner = note.owner;
+                const userID = req.user._id;
+                
                 // Does the note belong to the user? 
-                if (note.owner == req.user._id) {
+                if (owner.equals(userID)) {
+                    console.log('this is your note!');
                     return next();
                 } else {
                     req.flash('error_msg', 'Sorry you can only edit or delete notes that you own');

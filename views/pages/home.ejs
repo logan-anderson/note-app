@@ -11,8 +11,14 @@
         <h1>Welcome <%= name %> </h1>
         <h3>Your Notes</h3>
         <div class="row">
-            <%for(let i=0;i<notes.length;i++){ %>
-            <%- include('../partials/note', {note: notes[i]}); %>
+            <%for(let i=0;i<userNotes.length;i++){ %>
+            <%- include('../partials/note', {note: userNotes[i]}); %>
+            <% } %>
+        </div>
+        <h3>Public Notes</h3>
+        <div class="row">
+            <%for(let i=0;i<publicNotes.length;i++){ %>
+            <%- include('../partials/note', {note: publicNotes[i]}); %>
             <% } %>
         </div>
 

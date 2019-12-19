@@ -63,7 +63,7 @@ router.post('/delete/:id', ensureAuthenticated, ensureAccountOwnsNote, function 
             res.redirect('/');
         } else {
             console.log("deleted successful")
-            res.redirect('/');
+            res.redirect('/home');
         }
     });
 });

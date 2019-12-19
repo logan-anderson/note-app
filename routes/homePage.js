@@ -4,13 +4,29 @@ const { ensureAuthenticated } = require('../config/auth');
 const Note = require('../models/Note').Note;
 
 /* GET home page. */
+// TODO: refactor the yucky nested database queries
 router.get('/', ensureAuthenticated, function (req, res, next) {
-  Note.find({})
-    .then((nts) => {
-      res.render('pages/home', { name: req.user.name, notes: nts , user: req.user});
+  Note.find({ owner: req.user._id })
+    .then((userNotes) => {
+      Note.find({ public: true })
+        .then((publicNotes) => {
+          res.render('pages/home', {
+            name: req.user.name,
+            userNotes,
+            publicNotes,
+            user: req.user
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          req.flash('error_msg', 'Database error');
+          res.redirect('/home');
+        })
     })
-    .catch(err=>{
-      console.log(err)
+    .catch(err => {
+      console.log(err);
+      req.flash('error_msg', 'Database error');
+      res.redirect('/home');
     });
 
 });

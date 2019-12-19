@@ -9,7 +9,7 @@ const noteSchema = new mongoose.Schema({
     },
     public: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
