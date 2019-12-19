@@ -30,18 +30,21 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home
+                <a class="nav-link" href="<%= typeof user == 'undefined' ? '/' : '/home'%>">Home
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
+            <% if(typeof user != 'undefined') {%>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-light  mx-0 mx-md-2" data-toggle="modal"
                     data-target="#noteModal">
                     Add a note
                 </button>
             </li>
+            <% } %>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Dropdown

@@ -6,29 +6,30 @@ const passport = require('passport');
 
 mongoose.set('useFindAndModify', false);
 
-const Note = mongoose.model('Note');
-const NoteBackup = mongoose.model("NoteBackup");
+// const Note = mongoose.model('Note');
+// const NoteBackup = mongoose.model("NoteBackup");
 const Account = require('../models/Account');
 
 router.get('/', (req, res, render) => {
-    console.log("we here");
-    res.render('pages/account');
+    res.render('pages/account', { user: req.user, });
 })
 
 //if the request ./account/login
 router.get('/login', (req, res, next) => {
-    res.render('pages/login');
+    if(typeof req.user == 'undefined'){
+        res.render('pages/login');
+    } else {
+        req.flash('error_msg', 'Please logout before logging into a new account');
+        res.redirect('/home');
+    }
+    
 });
 
 //if the request ./account/register
 router.get('/register', (req, res, next) => {
     console.log("got here");
 
-    res.render('pages/register', {
-        success_msg: false,
-        error_msg: false,
-        error: '',
-    });
+    res.render('pages/register', { user: req.user });
 });
 
 // Register post 
@@ -57,9 +58,6 @@ router.post('/register', (req, res, next) => {
             password,
             password2,
             password2,
-            // success_msg: false,
-            // error_msg: false,
-            // error: '',
         });
     } else {
         // passed validation
@@ -77,9 +75,6 @@ router.post('/register', (req, res, next) => {
                         email,
                         password,
                         password2,
-                        // success_msg: false,
-                        // error_msg: false,
-                        // error: 'Email already in use',
                     });
                 } else {
                     const newAccount = new Account({
@@ -99,19 +94,15 @@ router.post('/register', (req, res, next) => {
                             })
                             .catch(err=>console.log(err))        
                     }));
-
-                    // res.redirect('/account/login');
                 }
             });
     }
-
-    // res.redirect('/account/login');
 });
 
 // Login
 router.post('/login', (req, res, next)=>{
     passport.authenticate('local',{
-        successRedirect: '/',
+        successRedirect: '/home',
         failureRedirect: '/account/login',
         failureFlash: true,
     })(req, res, next)

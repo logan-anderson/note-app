@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const {Note, NoteBackup} = require('../models/Note');
+const { ensureAuthenticated , ensureAccountOwnsNote} = require('../config/auth');
 mongoose.set('useFindAndModify', false);
 
 
@@ -11,7 +12,7 @@ router.get('/', function (req, res, next) {
 });
 
 // post method for adding a node to the database
-router.post('/add', function (req, res, next) {
+router.post('/add',ensureAuthenticated, function (req, res, next) {
     console.log(req.body.title);
     console.log(req.body.notes);
     if (req.body.title && req.body.notes) {
@@ -20,6 +21,7 @@ router.post('/add', function (req, res, next) {
             note_id: 1,
             list_content: JSON.parse(req.body.notes),
             title: req.body.title,
+            owner: req.user._id,
         }, (err, note) => {
             //call back function
             if (err) {
@@ -31,6 +33,7 @@ router.post('/add', function (req, res, next) {
                     note_id: 1,
                     list_content: JSON.parse(req.body.notes),
                     title: req.body.title,
+                    owner: req.user._id,
                 }, (err, note) => {
                     //call back function
                     if (err) {
@@ -51,7 +54,7 @@ router.post('/add', function (req, res, next) {
 });
 // post method for deleting a note from the database  /note/delete/<id of the note>
 // the id of the note is encoded in the front end 
-router.post('/delete/:id', function (req, res, next) {
+router.post('/delete/:id', ensureAuthenticated, ensureAccountOwnsNote, function (req, res, next) {
     console.log("we got a post request");
     const id = req.params.id;
     Note.deleteOne({ _id: id }, (err) => {
@@ -66,7 +69,7 @@ router.post('/delete/:id', function (req, res, next) {
 });
 //the get method for editing a note
 // /note/edit/<id>
-router.get('/edit/:id', function (req, res, next) {
+router.get('/edit/:id',ensureAuthenticated, ensureAccountOwnsNote,  function (req, res, next) {
     const id = req.params.id;
     Note.findOne({ _id: id }, (err, nt) => {
         if (err) {
@@ -77,13 +80,13 @@ router.get('/edit/:id', function (req, res, next) {
             console.log(nt);
             console.log(typeof (nt));
             //render the edit note page with the note 
-            res.render('pages/editNote', { note: nt });
+            res.render('pages/editNote', { note: nt, user: req.user,});
         }
     });
 });
 // post method for updating a note
 // /note/edit/<id>
-router.post('/edit/:id', function (req, res, next) {
+router.post('/edit/:id', ensureAuthenticated, ensureAccountOwnsNote, function (req, res, next) {
     console.log("we got a post request");
     const newNotes = JSON.parse(req.body.notes)
     const id = req.params.id;
