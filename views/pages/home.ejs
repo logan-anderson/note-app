@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+
+    <% include ../partials/header %>
+    <div class="container">
+        <% include ../partials/messages %>
+        <h1>Welcome <%= name %> </h1>
+        <h3>Your Notes</h3>
+        <div class="row">
+            <%for(let i=0;i<userNotes.length;i++){ %>
+            <%- include('../partials/note', {note: userNotes[i]}); %>
+            <% } %>
+        </div>
+        <h3>Public Notes</h3>
+        <div class="row">
+            <%for(let i=0;i<publicNotes.length;i++){ %>
+            <%- include('../partials/note', {note: publicNotes[i]}); %>
+            <% } %>
+        </div>
+
+        <!-- <h3>Groups</h3>
+        <div class="row">
+            <%//for(let i=0;i<notes.length;i++){ %>
+            <%//- include('../partials/note', {note: notes[i]}); %>
+            <%// } %>
+        </div> -->
+        <a href="/account/logout" class="btn btn-secondary">Logout</a>
+    </div>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+
+</html>

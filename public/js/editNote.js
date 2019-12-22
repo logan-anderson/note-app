@@ -8,7 +8,7 @@ function add_item_edit() {
     let cols = document.querySelector(".col-edit");
     let itemRow = document.querySelector(".list-items-row-edit");
 
-    // or update everything
+    // update everything
     hiddenFormNotes.value = JSON.stringify(getData_edit());
 
     let itemRowNew = itemRow.cloneNode(true);
