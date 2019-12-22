@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
   if(req.user){
     console.log(req.user._id)
   }
-  Note.find({}, (err, nts) => {
+  Note.find({public: true}, (err, nts) => {
     if (err) {
       console.log(err);
       res.send("Server Error");
