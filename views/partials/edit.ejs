@@ -1,8 +1,11 @@
-<div class="col col-edit">
+<div class="col col-edit form-group">
     <div class="row py-3">
-        <p>Title</p>
-        <textarea class="form-control" id="title-input-edit" rows="1"
-            aria-label="With textarea"><%= note.title %></textarea>
+        <label for="title" class="col-sm-2 col-form-label px-0"> Title</label>
+        <div class="col-sm-10 px-0" >
+            <input name="title" class="form-control" id="title-input-edit" type="text"
+                value="<%= note.title %>">
+            </input>
+        </div>
     </div>
     <%for(let i=0;i < note.list_content.length;i++){ %>
     <div class="row list-items-row-edit">
