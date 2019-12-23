@@ -4,7 +4,7 @@ cat  << EOF > temp.cred
 module.exports = {
     local: false,
     useUri: true,
-    uri: '$mongo_db_URI',
+    uri: '${mongo_db_URI}',
     userName: '',
     password: '',
     clusterName: '',
