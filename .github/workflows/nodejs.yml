@@ -20,13 +20,13 @@ jobs:
     - name: run init script
       env: 
         mongo_db_URI: ${{ secrets.mongo_db_URI }}
-      run: |
-        sh init.sh
+      with:
+        mongo_db_URI: ${{ secrets.mongo_db_URI }}
+      run: sh init.sh
     - name: npm install, build, and lint
       run: |
         ./init.sh
         npm ci
-        npm run build --if-present
         npm run lint
       env:
         CI: true
