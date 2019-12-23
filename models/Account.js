@@ -17,7 +17,7 @@ const AccountSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-})
+});
 
 const Account = mongoose.model('Account', AccountSchema);
 

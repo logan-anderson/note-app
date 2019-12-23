@@ -12,7 +12,7 @@ const Account = require('../models/Account');
 
 router.get('/', (req, res, render) => {
     res.render('pages/account', { user: req.user, });
-})
+});
 
 //if the request ./account/login
 router.get('/login', (req, res, next) => {
@@ -64,7 +64,7 @@ router.post('/register', (req, res, next) => {
         console.log(email);
         Account.findOne({ email: email })
             .then(account => {
-                console.log(account)
+                console.log(account);
                 if (account) {
                     // email is being useed
                     errors.push({msg: 'Opps... Looks like there is an account all ready created with that email'});

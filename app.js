@@ -5,30 +5,32 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-// var logger = require('morgan');
+const mongoose = require("mongoose");
+
+// Are we in develop mode or prod mode?
+let devMode = false;
+if( typeof process.argv[2]  == 'string' && process.argv[2] == 'dev') {
+    console.log('application is in dev mode');
+    devMode = true;
+}
 
 //set up database
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/notes_db", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(()=>console.log('mongodb connected...'))
-    .catch((err)=>console.log('error: '+ err));
+const { userName, password, dev, prod, local, clusterName, useUri, uri } = require('./credentials/credentials');
 
+const table = devMode ? dev: prod
+const trueUri = useUri ? uri : `mongodb+srv://${userName}:${password}@${clusterName}.mongodb.net/${table}?retryWrites=true&w=majority`;
 
-// const noteSchema = new mongoose.Schema({
-//     note_content: String,
-//     list_content: Array,
-//     title: String,
-// })
-// const noteSchema_backup = new mongoose.Schema({
-//     note_content: String,
-//     list_content: Array,
-//     title: String,
-// })
-// mongoose.model("Note", noteSchema);
-// mongoose.model("NoteBackup", noteSchema_backup);
-
-
-
+if (local) {
+    console.log('Using localhost mongodb');
+    mongoose.connect(`mongodb://localhost/${table}`, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(() => console.log('mongodb connected...'))
+        .catch((err) => console.log('error: ' + err));
+} else {
+    console.log('Using remote mongodb');
+    mongoose.connect(trueUri, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(() => console.log('mongodb connected...'))
+        .catch((err) => console.log('error: ' + err));
+}
 
 
 
@@ -66,11 +68,11 @@ app.use(flash());
 
 // Global Vars
 
-app.use( (req,res, next)=>{
+app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    
+
     next();
 });
 

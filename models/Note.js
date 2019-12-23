@@ -24,7 +24,7 @@ const noteSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-})
+});
 const Note = mongoose.model("Note", noteSchema);
 const NoteBackup = mongoose.model("NoteBackup", noteSchema);
 

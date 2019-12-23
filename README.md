@@ -18,15 +18,31 @@ first clone this repo and install the packages
 * `git clone git@github.com:logan-anderson/note-app.git`
 * `cd note-app`
 * `npm install`
+* install nodemon globally for dev mode `sudo npm install nodemon -g`
 
 you can run the app by enter the following
 
-* `DEBUG=note-app:* npm start`
+* dev mode: `npm run dev`
+* prod mode: `npm run start`
 
-or you can use nodemon for hot reload capability
+## database setup
 
-* `sudo npm install nodemon -g`
-* `nodemon` (This will now run the app)
+you can use mongodb cloud services by making an account at <https://www.mongodb.com/> and pasting the uri or add your password and username into the credentials.js file. or you can install mongodb on your machine and set the useLocal flag to true
+
+### example of a credentials/credentials.js
+
+``` javascript
+module.exports = {
+    local: false,
+    useUri: false,
+    uri: '',
+    userName: "username",
+    password: 'pass',
+    clusterName: '',
+    dev: "dev",
+    prod: "prod",
+}
+```
 
 ## server setup
 

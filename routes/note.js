@@ -88,7 +88,7 @@ router.get('/edit/:id', ensureAuthenticated, ensureAccountOwnsNote, function (re
 // /note/edit/<id>
 router.post('/edit/:id', ensureAuthenticated, ensureAccountOwnsNote, function (req, res, next) {
     console.log("we got a post request from " + req.baseUrl);
-    const newNotes = JSON.parse(req.body.notes)
+    const newNotes = JSON.parse(req.body.notes);
     const public = Boolean(req.body.public);
     console.log(public);
     const id = req.params.id;
