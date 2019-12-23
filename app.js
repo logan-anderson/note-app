@@ -65,7 +65,6 @@ app.use(passport.session());
 app.use(flash());
 
 // Global Vars
-
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -75,7 +74,6 @@ app.use((req, res, next) => {
 });
 
 
-// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
