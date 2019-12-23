@@ -4,33 +4,33 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const mongoose = require("mongoose");
-
+const mongoose = require('mongoose');
 // Are we in develop mode or prod mode?
 let devMode = false;
-if( typeof process.argv[2]  == 'string' && process.argv[2] == 'dev') {
-    console.log('application is in dev mode');
-    devMode = true;
+if (typeof process.argv[2] === 'string' && process.argv[2] === 'dev') {
+  console.log('application is in dev mode');
+  devMode = true;
 }
 
-//set up database
-const { userName, password, dev, prod, local, clusterName, useUri, uri } = require('./credentials/credentials');
+// set up database
+const {
+  userName, password, dev, prod, local, clusterName, useUri, uri,
+} = require('./credentials/credentials');
 
-const table = devMode ? dev: prod
+const table = devMode ? dev : prod;
 const trueUri = useUri ? uri : `mongodb+srv://${userName}:${password}@${clusterName}.mongodb.net/${table}?retryWrites=true&w=majority`;
 
 if (local) {
-    console.log('Using localhost mongodb');
-    mongoose.connect(`mongodb://localhost/${table}`, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(() => console.log('mongodb connected...'))
-        .catch((err) => console.log('error: ' + err));
+  console.log('Using localhost mongodb');
+  mongoose.connect(`mongodb://localhost/${table}`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('mongodb connected...'))
+    .catch((err) => console.log(`error: ${err}`));
 } else {
-    console.log('Using remote mongodb');
-    mongoose.connect(trueUri, { useNewUrlParser: true, useUnifiedTopology: true })
-        .then(() => console.log('mongodb connected...'))
-        .catch((err) => console.log('error: ' + err));
+  console.log('Using remote mongodb');
+  mongoose.connect(trueUri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('mongodb connected...'))
+    .catch((err) => console.log(`error: ${err}`));
 }
-
 
 
 const indexRouter = require('./routes/index');
@@ -45,7 +45,6 @@ const app = express();
 require('./config/passport')(passport);
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -53,9 +52,9 @@ app.set('view engine', 'ejs');
 
 // express session middlewear
 app.use(session({
-    secret: 'shh',
-    resave: true,
-    saveUninitialized: true,
+  secret: 'shh',
+  resave: true,
+  saveUninitialized: true,
 }));
 
 // passport middlewear
@@ -68,11 +67,11 @@ app.use(flash());
 // Global Vars
 
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
 
-    next();
+  next();
 });
 
 

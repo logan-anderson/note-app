@@ -1,4 +1,4 @@
-const localStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -7,36 +7,36 @@ const bcrypt = require('bcryptjs');
 const Account = require('../models/Account');
 
 
-module.exports = function (passport) {
-    passport.use(
-        new localStrategy({ usernameField: 'email', }, (email, password, done) => {
-            // Match account
-            Account.findOne({ email: email })
-                .then(account => {
-                    if (!account) {
-                        return done(null, false, { message: 'That email is not registered' });
-                    }
-                    // Match Password
-                    bcrypt.compare(password, account.password, (err, isMatch) => {
-                        if (err) throw err;
+module.exports = (passport) => {
+  passport.use(
+    new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+      // Match account
+      Account.findOne({ email })
+        // eslint-disable-next-line consistent-return
+        .then((account) => {
+          if (!account) {
+            return done(null, false, { message: 'That email is not registered' });
+          }
+          // Match Password
+          bcrypt.compare(password, account.password, (err, isMatch) => {
+            if (err) throw err;
 
-                        if (isMatch) {
-                            return done(null, account);
-                        } else {
-                            return done(null, false, { message: 'Invalid password' });
-                        }
-                    });
-                })
-                .catch(err => console.log(err));
+            if (isMatch) {
+              return done(null, account);
+            } return done(null, false, { message: 'Invalid password' });
+          });
         })
-    );
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    });
+        .catch((err) => console.log(err));
+      return null;
+    }),
+  );
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
 
-    passport.deserializeUser((id, done) => {
-        Account.findById(id, (err, user) => {
-            done(err, user);
-        });
+  passport.deserializeUser((id, done) => {
+    Account.findById(id, (err, user) => {
+      done(err, user);
     });
+  });
 };
