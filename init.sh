@@ -12,4 +12,4 @@ module.exports = {
     prod: '',
 } 
 EOF
-cat temp.cred
+cp credentials.js.template credentials/credentials.js
