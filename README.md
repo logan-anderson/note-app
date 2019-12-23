@@ -36,13 +36,15 @@ module.exports = {
     local: false,
     useUri: false,
     uri: '',
-    userName: "username",
+    userName: 'username',
     password: 'pass',
     clusterName: '',
-    dev: "dev",
-    prod: "prod",
+    dev: 'dev',
+    prod: 'prod',
 }
 ```
+
+you can get a credential template in the correct directory by running init.sh
 
 ## server setup
 
