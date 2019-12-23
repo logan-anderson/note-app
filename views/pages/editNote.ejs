@@ -18,13 +18,13 @@
                     <input name="public" <% if( note.public) { %> checked <% }%> id="pubCheck" type="checkbox" data-toggle="toggle" data-size="sm">
                 </div>
                 <div class="row justify-content-around">
+                    <div class="col" style="display: flex; flex-direction: row-reverse">
+                        <a href="/" class="btn btn-outline-danger" style="display: flex;">Discard Changes</a>
+                    </div>
                     <div class="col">
                         <button class="btn btn-outline-info btn-edit-save" type="submit">
                             Save Changes
                         </button>
-                    </div>
-                    <div class="col" style="display: flex; flex-direction: row-reverse">
-                        <a href="/" class="btn btn-outline-danger" style="display: flex;">Discard Changes</a>
                     </div>
                 </div>
 
