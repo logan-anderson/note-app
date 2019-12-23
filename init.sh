@@ -12,6 +12,6 @@ module.exports = {
     prod: '',
 } 
 EOF
-
+cat temp.cred
 cp temp.cred ./credentials/credentials.js
 rm temp.cred
