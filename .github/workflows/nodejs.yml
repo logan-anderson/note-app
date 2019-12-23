@@ -23,7 +23,6 @@ jobs:
       run: sh init.sh
     - name: npm install, build, and lint
       run: |
-        ./init.sh
         npm ci
         npm run lint
       env:
