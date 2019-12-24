@@ -14,7 +14,7 @@ if (typeof process.argv[2] === 'string' && process.argv[2] === 'dev') {
 
 // set up database
 const {
-  userName, password, dev, prod, local, clusterName, useUri, uri,
+  userName, password, dev, prod, local, clusterName, useUri, uri, devUser, devPass,
 } = require('./credentials/credentials');
 
 const table = devMode ? dev : prod;
@@ -69,7 +69,8 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
-
+  res.locals.devUser = devMode ? devUser || '' : '';
+  res.locals.devPass = devMode ? devPass || '' : '';
   next();
 });
 
