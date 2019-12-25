@@ -71,6 +71,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.devUser = devMode ? devUser || '' : '';
   res.locals.devPass = devMode ? devPass || '' : '';
+
   next();
 });
 
