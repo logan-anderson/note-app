@@ -49,8 +49,8 @@ router.post('/add', ensureAuthenticated, (req, res, next) => {
     });
     console.log('not good');
   } else {
-    console.log('got nothing!');
-    res.redirect('/');
+    req.flash('error_msg', 'Sorry must have a title and note content');
+    res.redirect('/home');
   }
 });
 // post method for deleting a note from the database  /note/delete/<id of the note>
@@ -95,21 +95,26 @@ router.post('/edit/:id', ensureAuthenticated, ensureAccountOwnsNote, (req, res, 
   const { id } = req.params;
   const { title } = req.body;
 
-  // find the Note in the database and update it with the edited content
-  Note.findOneAndUpdate({ _id: id },
-    {
-      list_content: newNotes,
-      title,
-      public: publicNote,
-    }, { upsert: true }, (err, newNote) => {
-      if (err) {
-        console.log('error in updating');
-      } else {
-      // redirect to where they were
-        console.log('this is the new note');
-        console.log(newNote);
-        res.redirect('/home');
-      }
-    });
+  if (newNotes && title) {
+    // find the Note in the database and update it with the edited content
+    Note.findOneAndUpdate({ _id: id },
+      {
+        list_content: newNotes,
+        title,
+        public: publicNote,
+      }, { upsert: true }, (err, newNote) => {
+        if (err) {
+          console.log('error in updating');
+        } else {
+        // redirect to where they were
+          console.log('this is the new note');
+          console.log(newNote);
+          res.redirect('/home');
+        }
+      });
+  } else {
+    req.flash('error_msg', 'Sorry your notes must have a title and note content');
+    res.redirect('/home');
+  }
 });
 module.exports = router;

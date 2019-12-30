@@ -1,8 +1,24 @@
-/* eslint-disable no-undef */
 // all js to control the edit list page
-
-
 const hiddenFormNotesEdit = document.querySelector('#note-list-edit');
+function makeDanger(btn) {
+  btn.classList.remove('btn-outline-secondary');
+  btn.classList.add('btn-outline-danger');
+  btn.textContent = 'Remove item';
+  // eslint-disable-next-line no-use-before-define
+  btn.removeEventListener('click', addItemEdit);
+  const row = btn.closest('.list-items-row-edit');
+  btn.addEventListener('click', () => {
+    row.remove();
+  });
+}
+function makeNormal(btn) {
+  btn.classList.add('btn-outline-secondary');
+  btn.classList.remove('btn-outline-danger');
+  btn.textContent = 'Add item';
+  // eslint-disable-next-line no-use-before-define
+  btn.addEventListener('click', addItemEdit);
+}
+
 function getDataEdit() {
   const data = [];
   document.querySelectorAll('.list-items-row-edit').forEach((x) => {
@@ -11,11 +27,9 @@ function getDataEdit() {
   return data;
 }
 function setupListenersEdit() {
-  const buttons = document.querySelectorAll('.add-item-btn-edit');
-  buttons.forEach((x) => {
-    // eslint-disable-next-line no-use-before-define
-    x.addEventListener('click', addItemEdit);
-  });
+  const allbtns = [...document.querySelectorAll('.add-item-btn-edit')];
+  allbtns.slice(0, allbtns.length - 1).forEach(makeDanger);
+  makeNormal(allbtns[allbtns.length - 1]);
 }
 function addItemEdit() {
   // set the hidden title form value
@@ -30,7 +44,10 @@ function addItemEdit() {
   const itemRowNew = itemRow.cloneNode(true);
   itemRowNew.childNodes[1].childNodes[1].value = '';
   cols.appendChild(itemRowNew);
-  setupListenersEdit();
+
+  const allbtns = [...document.querySelectorAll('.add-item-btn-edit')];
+  allbtns.slice(0, allbtns.length - 1).forEach(makeDanger);
+  makeNormal(allbtns[allbtns.length - 1]);
 }
 
 
