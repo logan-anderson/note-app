@@ -3,6 +3,7 @@ const hiddenFormNotesEdit = document.querySelector('#note-list-edit');
 function makeDanger(btn) {
   btn.classList.remove('btn-outline-secondary');
   btn.classList.add('btn-outline-danger');
+  // eslint-disable-next-line no-param-reassign
   btn.textContent = 'Remove item';
   // eslint-disable-next-line no-use-before-define
   btn.removeEventListener('click', addItemEdit);
@@ -14,6 +15,7 @@ function makeDanger(btn) {
 function makeNormal(btn) {
   btn.classList.add('btn-outline-secondary');
   btn.classList.remove('btn-outline-danger');
+  // eslint-disable-next-line no-param-reassign
   btn.textContent = 'Add item';
   // eslint-disable-next-line no-use-before-define
   btn.addEventListener('click', addItemEdit);
