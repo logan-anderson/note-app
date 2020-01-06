@@ -2,8 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 const mongoose = require('mongoose');
+
+const { hasBadWords } = require('../helper/filter');
 const { Note, NoteBackup } = require('../models/Note');
 const { ensureAuthenticated, ensureAccountOwnsNote } = require('../config/auth');
+
 
 mongoose.set('useFindAndModify', false);
 
@@ -18,36 +21,41 @@ router.post('/add', ensureAuthenticated, (req, res, next) => {
   console.log(req.body.title);
   console.log(req.body.notes);
   if (req.body.title && req.body.notes) {
+    if (hasBadWords(req.body.title, req.body.notes)) {
+      req.flash('error_msg', 'Sorry please no profanity, this offence has been marked on your account');
+      res.redirect('/home');
+    } else {
     // make a backup note
-    NoteBackup.create({
-      note_id: 1,
-      list_content: JSON.parse(req.body.notes),
-      title: req.body.title,
-      owner: req.user._id,
-    }, (err, note) => {
+      NoteBackup.create({
+        note_id: 1,
+        list_content: JSON.parse(req.body.notes),
+        title: req.body.title,
+        owner: req.user._id,
+      }, (err, note) => {
       // call back function
-      if (err) {
-        console.log('Something went wrong');
-      } else {
-        console.log('We saved a note to the db');
-        // make the real note
-        Note.create({
-          note_id: 1,
-          list_content: JSON.parse(req.body.notes),
-          title: req.body.title,
-          owner: req.user._id,
-        }, (errCreate) => {
+        if (err) {
+          console.log('Something went wrong');
+        } else {
+          console.log('We saved a note to the db');
+          // make the real note
+          Note.create({
+            note_id: 1,
+            list_content: JSON.parse(req.body.notes),
+            title: req.body.title,
+            owner: req.user._id,
+          }, (errCreate) => {
           // call back function
-          if (errCreate) {
-            console.log('Something went wrong');
-            res.send('Server error');
-          } else {
-            res.redirect('/home');
-          }
-        });
-      }
-    });
-    console.log('not good');
+            if (errCreate) {
+              console.log('Something went wrong');
+              res.send('Server error');
+            } else {
+              res.redirect('/home');
+            }
+          });
+        }
+      });
+      console.log('not good');
+    }
   } else {
     req.flash('error_msg', 'Sorry must have a title and note content');
     res.redirect('/home');
