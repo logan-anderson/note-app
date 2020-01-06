@@ -5,7 +5,7 @@ function hasBadWords(title, notes) {
     return true;
   }
   let hasBad = false;
-  notes.foreach((word) => {
+  notes.forEach((word) => {
     if (swearjar.profane(word)) {
       hasBad = true;
     }
