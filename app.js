@@ -1,3 +1,4 @@
+const Ddos = require('ddos');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -5,6 +6,9 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
+
+const ddos = new Ddos({ burst: 10, limit: 15 });
+
 // Are we in develop mode or prod mode?
 let devMode = false;
 if (typeof process.argv[2] === 'string' && process.argv[2] === 'dev') {
@@ -41,6 +45,9 @@ const homeRouter = require('./routes/homePage');
 
 const app = express();
 
+// set up ddos
+
+app.use(ddos.express);
 // passport config
 require('./config/passport')(passport);
 
