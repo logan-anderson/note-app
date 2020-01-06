@@ -21,7 +21,7 @@ router.post('/add', ensureAuthenticated, (req, res, next) => {
   console.log(req.body.title);
   console.log(req.body.notes);
   if (req.body.title && req.body.notes) {
-    if (hasBadWords(req.body.title, req.body.notes)) {
+    if (hasBadWords(req.body.title, JSON.parse(req.body.notes))) {
       req.flash('error_msg', 'Sorry please no profanity, this offence has been marked on your account');
       res.redirect('/home');
     } else {
@@ -104,22 +104,27 @@ router.post('/edit/:id', ensureAuthenticated, ensureAccountOwnsNote, (req, res, 
   const { title } = req.body;
 
   if (newNotes && title) {
+    if (hasBadWords(title, newNotes)) {
+      req.flash('error_msg', 'Sorry please no profanity, this offence has been marked on your account');
+      res.redirect('/home');
+    } else {
     // find the Note in the database and update it with the edited content
-    Note.findOneAndUpdate({ _id: id },
-      {
-        list_content: newNotes,
-        title,
-        public: publicNote,
-      }, { upsert: true }, (err, newNote) => {
-        if (err) {
-          console.log('error in updating');
-        } else {
-        // redirect to where they were
-          console.log('this is the new note');
-          console.log(newNote);
-          res.redirect('/home');
-        }
-      });
+      Note.findOneAndUpdate({ _id: id },
+        {
+          list_content: newNotes,
+          title,
+          public: publicNote,
+        }, { upsert: true }, (err, newNote) => {
+          if (err) {
+            console.log('error in updating');
+          } else {
+            // redirect to where they were
+            console.log('this is the new note');
+            console.log(newNote);
+            res.redirect('/home');
+          }
+        });
+    }
   } else {
     req.flash('error_msg', 'Sorry your notes must have a title and note content');
     res.redirect('/home');
