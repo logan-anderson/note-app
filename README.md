@@ -56,3 +56,7 @@ I used digital ocean for a VM. I  used pm2 (node package) and nginx to deploy th
 
 * <https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04>
 * <https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04>
+
+## instructions 
+
+run `git clone git@github.com:logan-anderson/note-app.git`
