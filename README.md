@@ -50,7 +50,7 @@ you can get a credential template in the correct directory by running init.sh
 
 * `npx eslint . --fix`
 
-## server setup
+## server setup (currently offline)
 
 I used digital ocean for a VM. I  used pm2 (node package) and nginx to deploy the app on a server. I used these two resources to help me
 
