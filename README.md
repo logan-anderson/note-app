@@ -1,6 +1,6 @@
 # List tracker app
 
-I made this simple app in some of my free time when I did not have school work. This idea of this app was to get fermilular for nodejs and express and practice my backend skills. I made this app so that my family had has a place to store and look at each other christmas lists (please don't delete them).
+This is a simple list tracking app that was made in some of my free time when I did not have school work. This idea of this app was to get familiar with nodejs, expres and passport.js as well as practice my backend skills. The Idea for the app came to me when I needed a place for my family to store and look at chirsmas lists online.
 
 ## stack
 
@@ -9,7 +9,9 @@ This app uses a pretty simple stack
 * Nodejs
 * Express
 * mongodb
-* uses ejs and mongoose node packages
+* passport for user authentication
+* mongoose for database interactions
+* ejs for making html templates that are rendered serverside
 
 ## running the app
 
