@@ -1,8 +1,9 @@
-# List tracker app
+# List Tracking App
 
 This is a simple list tracking app that was made in some of my free time when I did not have school work. This idea of this app was to get familiar with nodejs, express and passport.js as well as practice my backend skills. The Idea for the app came to me when I needed a place for my family to store and look at christmas lists online.
 
 This project as for most of my recent projects I try to follow to the [git-flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) practices 
+
 ## Stack
 
 This app uses a pretty simple stack
@@ -15,7 +16,17 @@ This app uses a pretty simple stack
 * ejs for making html templates that are rendered on the server side
 
 
-## running the app
+
+## Server setup (currently offline)
+
+I used digital ocean for a VM. I used pm2 (node package) and nginx to deploy the app on a server. I used these two resources to help me
+
+* [Nginx](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
+* [Seting up a NodeJs App for Production](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04)
+
+
+# Setup for Local Development
+## Running the App
 
 first clone this repo and install the packages
 
@@ -29,7 +40,7 @@ you can run the app by enter the following
 * dev mode: `npm run dev`
 * prod mode: `npm run start`
 
-## database setup
+## Database Setup
 
 you can use mongodb cloud services by making an account at <https://www.mongodb.com/> and pasting the uri or add your password and username into the credentials.js file. or you can install mongodb on your machine and set the useLocal flag to true (<https://docs.mongodb.com/manual/administration/install-on-linux/>)
 
@@ -50,17 +61,6 @@ module.exports = {
 
 you can get a credential template in the correct directory by running init.sh
 
-## run linter
+## Run Linter
 
 * `npx eslint . --fix`
-
-## server setup (currently offline)
-
-I used digital ocean for a VM. I  used pm2 (node package) and nginx to deploy the app on a server. I used these two resources to help me
-
-* <https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04>
-* <https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04>
-
-## instructions 
-
-run `git clone git@github.com:logan-anderson/note-app.git`
