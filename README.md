@@ -10,10 +10,10 @@ This app uses a pretty simple stack
 
 * Nodejs
 * Express
-* mongodb
-* passport for user authentication
-* mongoose for database interactions
-* ejs for making html templates that are rendered on the server side
+* Mongodb
+* Passport for user authentication
+* Mongoose for database interactions
+* EJS for making html templates that are rendered on the server side
 
 
 
