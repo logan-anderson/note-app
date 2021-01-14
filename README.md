@@ -42,7 +42,7 @@ you can run the app by enter the following
 
 ## Database Setup
 
-you can use mongodb cloud services by making an account at <https://www.mongodb.com/> and pasting the uri or add your password and username into the credentials.js file. or you can install mongodb on your machine and set the useLocal flag to true (<https://docs.mongodb.com/manual/administration/install-on-linux/>)
+You can use mongodb cloud services by making [an account](https://www.mongodb.com/) and pasting the uri or add your password and username into the credentials.js file. Alternatively, you can install mongodb on your machine and set [the useLocal flag to true](https://docs.mongodb.com/manual/administration/install-on-linux/)
 
 ### example of a credentials/credentials.js
 
